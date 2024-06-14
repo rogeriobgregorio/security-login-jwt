@@ -1,10 +1,10 @@
 package com.rogeriogregorio.securityloginjwt.security.services.impl;
 
+import com.rogeriogregorio.securityloginjwt.security.entities.dto.UserAuthDetails;
 import com.rogeriogregorio.securityloginjwt.security.repositories.UserRepository;
 import com.rogeriogregorio.securityloginjwt.security.services.AuthorizationService;
-import com.rogeriogregorio.securityloginjwt.security.services.CatchError;
+import com.rogeriogregorio.securityloginjwt.security.utils.CatchError;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,7 +20,8 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) {
-        return catchError.run(() -> userRepository.findByEmail(email));
+    public UserAuthDetails loadUserByUsername(String email) {
+        return catchError.run(() -> userRepository.findByEmail(email))
+                .map(UserAuthDetails::new).orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

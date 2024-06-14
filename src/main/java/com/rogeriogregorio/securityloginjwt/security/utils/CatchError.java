@@ -1,4 +1,4 @@
-package com.rogeriogregorio.securityloginjwt.security.services;
+package com.rogeriogregorio.securityloginjwt.security.utils;
 
 import org.springframework.stereotype.Component;
 

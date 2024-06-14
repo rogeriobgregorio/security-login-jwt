@@ -1,8 +1,8 @@
 package com.rogeriogregorio.securityloginjwt.security.services.impl;
 
+import com.rogeriogregorio.securityloginjwt.security.entities.dto.UserAuthDetails;
 import com.rogeriogregorio.securityloginjwt.security.entities.dto.LoginRequest;
 import com.rogeriogregorio.securityloginjwt.security.entities.dto.LoginResponse;
-import com.rogeriogregorio.securityloginjwt.security.entities.User;
 import com.rogeriogregorio.securityloginjwt.security.services.AuthenticationService;
 import com.rogeriogregorio.securityloginjwt.security.services.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         Authentication authenticate = authenticationManager.authenticate(usernamePassword);
 
-        String token = tokenService.generateAuthenticationToken((User) authenticate.getPrincipal());
+        String token = tokenService.generateAuthenticationToken((UserAuthDetails) authenticate.getPrincipal());
 
         return new LoginResponse(token);
     }

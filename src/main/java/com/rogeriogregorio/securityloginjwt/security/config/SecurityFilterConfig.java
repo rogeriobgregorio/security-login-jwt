@@ -1,7 +1,8 @@
 package com.rogeriogregorio.securityloginjwt.security.config;
 
+import com.rogeriogregorio.securityloginjwt.security.entities.dto.UserAuthDetails;
 import com.rogeriogregorio.securityloginjwt.security.repositories.UserRepository;
-import com.rogeriogregorio.securityloginjwt.security.services.CatchError;
+import com.rogeriogregorio.securityloginjwt.security.utils.CatchError;
 import com.rogeriogregorio.securityloginjwt.security.services.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -40,7 +40,7 @@ public class SecurityFilterConfig extends OncePerRequestFilter {
 
         if (token != null) {
             String emailLogin = tokenService.validateAuthenticationToken(token);
-            UserDetails user = userRepository.findByEmail(emailLogin);
+            UserAuthDetails user = findUserByEmail(emailLogin);
 
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
@@ -60,5 +60,10 @@ public class SecurityFilterConfig extends OncePerRequestFilter {
         if (authHeader == null) return null;
 
         return authHeader.replace("Bearer ", "");
+    }
+
+    public UserAuthDetails findUserByEmail(String email) {
+        return catchError.run(() -> userRepository.findByEmail(email))
+                .map(UserAuthDetails::new).orElseThrow(() -> new RuntimeException("User not found: " + email));
     }
 }

@@ -1,7 +1,7 @@
-package com.rogeriogregorio.securityloginjwt.security.services.impl;
+package com.rogeriogregorio.securityloginjwt.security.utils.impl;
 
-import com.rogeriogregorio.securityloginjwt.security.services.DataMapper;
-import com.rogeriogregorio.securityloginjwt.security.services.CatchError;
+import com.rogeriogregorio.securityloginjwt.security.utils.DataMapper;
+import com.rogeriogregorio.securityloginjwt.security.utils.CatchError;
 import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

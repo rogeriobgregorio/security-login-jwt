@@ -1,6 +1,6 @@
 package com.rogeriogregorio.securityloginjwt.security.config;
 
-import com.rogeriogregorio.securityloginjwt.security.services.CatchError;
+import com.rogeriogregorio.securityloginjwt.security.utils.CatchError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

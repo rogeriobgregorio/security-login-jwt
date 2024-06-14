@@ -1,9 +1,9 @@
-package com.rogeriogregorio.securityloginjwt.security.services.impl;
+package com.rogeriogregorio.securityloginjwt.security.utils.impl;
 
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.rogeriogregorio.securityloginjwt.security.exceptions.*;
-import com.rogeriogregorio.securityloginjwt.security.services.CatchError;
+import com.rogeriogregorio.securityloginjwt.security.utils.CatchError;
 import jakarta.servlet.ServletException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
