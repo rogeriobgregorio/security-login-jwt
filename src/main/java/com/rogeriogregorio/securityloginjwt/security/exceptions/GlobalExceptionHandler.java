@@ -7,7 +7,6 @@ import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.mail.MailException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -141,14 +140,6 @@ public class GlobalExceptionHandler {
 
         ErrorDetails error = new ErrorDetails(HttpStatus.INTERNAL_SERVER_ERROR,
                 "TokenJwtException: an error occurred while trying to execute a JWT class method", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
-    }
-
-    @ExceptionHandler(MailException.class)
-    public ResponseEntity<ErrorDetails> handleMailException(MailException ex) {
-
-        ErrorDetails error = new ErrorDetails(HttpStatus.INTERNAL_SERVER_ERROR,
-                "MailException: an error occurred in the mail service", ex.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 

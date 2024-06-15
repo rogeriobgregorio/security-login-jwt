@@ -26,7 +26,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
-                           PasswordEncoder passwordEncoder, CatchError catchError,
+                           PasswordEncoder passwordEncoder,
+                           CatchError catchError,
                            DataMapper dataMapper) {
 
         this.userRepository = userRepository;

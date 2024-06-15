@@ -48,22 +48,20 @@ public class SecurityFilterConfig extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
-        catchError.run(() -> {
-            filterChain.doFilter(request, response);
-            return null;
-        });
+        catchError.run(() -> filterChain.doFilter(request, response));
     }
 
     private String recoverToken(HttpServletRequest httpServletRequest) {
 
         String authHeader = httpServletRequest.getHeader("Authorization");
         if (authHeader == null) return null;
-
         return authHeader.replace("Bearer ", "");
     }
 
     public UserAuthDetails findUserByEmail(String email) {
+
         return catchError.run(() -> userRepository.findByEmail(email))
-                .map(UserAuthDetails::new).orElseThrow(() -> new RuntimeException("User not found: " + email));
+                .map(UserAuthDetails::new)
+                .orElseThrow(() -> new RuntimeException("User not found: " + email));
     }
 }

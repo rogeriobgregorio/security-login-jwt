@@ -29,14 +29,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         String email = loginRequest.getEmail();
         String password = loginRequest.getPassword();
-
-        UsernamePasswordAuthenticationToken usernamePassword =
-                new UsernamePasswordAuthenticationToken(email, password);
+        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(email, password);
 
         Authentication authenticate = authenticationManager.authenticate(usernamePassword);
-
         String token = tokenService.generateAuthenticationToken((UserAuthDetails) authenticate.getPrincipal());
-
         return new LoginResponse(token);
     }
 }
