@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping("/private")
-    public ResponseEntity<String> register() {
+    public ResponseEntity<String> test() {
 
         String response = "Hello world!";
         return ResponseEntity

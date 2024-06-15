@@ -24,6 +24,6 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
         return catchError.run(() -> userRepository.findByEmail(email))
                 .map(UserAuthDetails::new)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("User cannot be loaded by email"));
     }
 }

@@ -2,8 +2,8 @@ package com.rogeriogregorio.securityloginjwt.security.config;
 
 import com.rogeriogregorio.securityloginjwt.security.entities.dto.UserAuthDetails;
 import com.rogeriogregorio.securityloginjwt.security.repositories.UserRepository;
-import com.rogeriogregorio.securityloginjwt.security.utils.CatchError;
 import com.rogeriogregorio.securityloginjwt.security.services.TokenService;
+import com.rogeriogregorio.securityloginjwt.security.utils.CatchError;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -40,10 +40,10 @@ public class SecurityFilterConfig extends OncePerRequestFilter {
 
         if (token != null) {
             String emailLogin = tokenService.validateAuthenticationToken(token);
-            UserAuthDetails user = findUserByEmail(emailLogin);
+            UserAuthDetails userAuthDetails = findUserByEmail(emailLogin);
 
             UsernamePasswordAuthenticationToken authentication =
-                    new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                    new UsernamePasswordAuthenticationToken(userAuthDetails, null, userAuthDetails.getAuthorities());
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }

@@ -31,12 +31,12 @@ public class TokenServiceImpl implements TokenService {
         return Algorithm.HMAC256(secretKey);
     }
 
-    public String generateAuthenticationToken(UserAuthDetails user) {
+    public String generateAuthenticationToken(UserAuthDetails userAuthDetails) {
 
         return catchError.run(() -> JWT
                         .create()
                         .withIssuer(ISSUER_NAME)
-                        .withSubject(user.getUsername())
+                        .withSubject(userAuthDetails.getUsername())
                         .withExpiresAt(EXPIRY_TIME)
                         .sign(algorithm()));
     }

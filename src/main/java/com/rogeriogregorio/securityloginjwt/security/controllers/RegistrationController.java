@@ -4,6 +4,8 @@ import com.rogeriogregorio.securityloginjwt.security.entities.dto.UserRequest;
 import com.rogeriogregorio.securityloginjwt.security.entities.dto.UserResponse;
 import com.rogeriogregorio.securityloginjwt.security.services.UserService;
 import jakarta.validation.Valid;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegistrationController {
 
     private final UserService userService;
+    private static final Logger LOGGER = LogManager.getLogger(RegistrationController.class);
 
     @Autowired
     public RegistrationController(UserService userService) {
@@ -25,7 +28,7 @@ public class RegistrationController {
 
     @PostMapping
     public ResponseEntity<UserResponse> register(@Valid @RequestBody UserRequest userRequest) {
-        
+
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(userService.registerUser(userRequest));
