@@ -1,6 +1,6 @@
 package com.rogeriogregorio.securityloginjwt.security.services.impl;
 
-import com.rogeriogregorio.securityloginjwt.security.entities.dto.UserAuthDetails;
+import com.rogeriogregorio.securityloginjwt.security.dto.UserAuthDetails;
 import com.rogeriogregorio.securityloginjwt.security.repositories.UserRepository;
 import com.rogeriogregorio.securityloginjwt.security.services.AuthorizationService;
 import com.rogeriogregorio.securityloginjwt.security.utils.CatchError;

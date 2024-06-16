@@ -1,8 +1,8 @@
 package com.rogeriogregorio.securityloginjwt.security.services.impl;
 
-import com.rogeriogregorio.securityloginjwt.security.entities.dto.UserAuthDetails;
-import com.rogeriogregorio.securityloginjwt.security.entities.dto.LoginRequest;
-import com.rogeriogregorio.securityloginjwt.security.entities.dto.LoginResponse;
+import com.rogeriogregorio.securityloginjwt.security.dto.UserAuthDetails;
+import com.rogeriogregorio.securityloginjwt.security.dto.LoginRequest;
+import com.rogeriogregorio.securityloginjwt.security.dto.LoginResponse;
 import com.rogeriogregorio.securityloginjwt.security.services.AuthenticationService;
 import com.rogeriogregorio.securityloginjwt.security.services.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;

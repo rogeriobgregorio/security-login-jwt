@@ -1,7 +1,7 @@
 package com.rogeriogregorio.securityloginjwt.security.controllers;
 
-import com.rogeriogregorio.securityloginjwt.security.entities.dto.UserRequest;
-import com.rogeriogregorio.securityloginjwt.security.entities.dto.UserResponse;
+import com.rogeriogregorio.securityloginjwt.security.dto.UserRequest;
+import com.rogeriogregorio.securityloginjwt.security.dto.UserResponse;
 import com.rogeriogregorio.securityloginjwt.security.services.UserService;
 import jakarta.validation.Valid;
 import org.apache.logging.log4j.LogManager;

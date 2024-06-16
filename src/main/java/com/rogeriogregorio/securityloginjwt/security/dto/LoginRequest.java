@@ -1,4 +1,4 @@
-package com.rogeriogregorio.securityloginjwt.security.entities.dto;
+package com.rogeriogregorio.securityloginjwt.security.dto;
 
 import java.io.Serial;
 import java.io.Serializable;

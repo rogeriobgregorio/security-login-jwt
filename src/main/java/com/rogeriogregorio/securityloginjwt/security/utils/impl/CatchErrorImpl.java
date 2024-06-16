@@ -41,8 +41,8 @@ public class CatchErrorImpl implements CatchError {
             return method.run();
         } catch (Exception ex) {
             throwException(ex);
-            return null;
         }
+        return null;
     }
 
     @Override

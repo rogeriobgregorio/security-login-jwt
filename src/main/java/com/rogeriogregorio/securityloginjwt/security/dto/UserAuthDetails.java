@@ -1,4 +1,4 @@
-package com.rogeriogregorio.securityloginjwt.security.entities.dto;
+package com.rogeriogregorio.securityloginjwt.security.dto;
 
 import com.rogeriogregorio.securityloginjwt.security.entities.User;
 import com.rogeriogregorio.securityloginjwt.security.entities.enums.UserRole;

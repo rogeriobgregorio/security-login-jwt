@@ -1,6 +1,6 @@
 package com.rogeriogregorio.securityloginjwt.security.services;
 
-import com.rogeriogregorio.securityloginjwt.security.entities.dto.UserAuthDetails;
+import com.rogeriogregorio.securityloginjwt.security.dto.UserAuthDetails;
 import org.springframework.stereotype.Component;
 
 @Component

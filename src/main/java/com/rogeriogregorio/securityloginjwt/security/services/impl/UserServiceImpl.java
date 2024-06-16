@@ -1,8 +1,8 @@
 package com.rogeriogregorio.securityloginjwt.security.services.impl;
 
 import com.rogeriogregorio.securityloginjwt.security.entities.User;
-import com.rogeriogregorio.securityloginjwt.security.entities.dto.UserRequest;
-import com.rogeriogregorio.securityloginjwt.security.entities.dto.UserResponse;
+import com.rogeriogregorio.securityloginjwt.security.dto.UserRequest;
+import com.rogeriogregorio.securityloginjwt.security.dto.UserResponse;
 import com.rogeriogregorio.securityloginjwt.security.entities.enums.UserRole;
 import com.rogeriogregorio.securityloginjwt.security.repositories.UserRepository;
 import com.rogeriogregorio.securityloginjwt.security.utils.CatchError;

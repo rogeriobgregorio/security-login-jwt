@@ -1,7 +1,7 @@
 package com.rogeriogregorio.securityloginjwt.security.controllers;
 
-import com.rogeriogregorio.securityloginjwt.security.entities.dto.LoginRequest;
-import com.rogeriogregorio.securityloginjwt.security.entities.dto.LoginResponse;
+import com.rogeriogregorio.securityloginjwt.security.dto.LoginRequest;
+import com.rogeriogregorio.securityloginjwt.security.dto.LoginResponse;
 import com.rogeriogregorio.securityloginjwt.security.services.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
