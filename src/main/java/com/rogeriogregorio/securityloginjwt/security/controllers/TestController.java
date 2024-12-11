@@ -13,9 +13,9 @@ public class TestController {
     @GetMapping("/private")
     public ResponseEntity<String> test() {
 
-        String response = "Hello world!";
         return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(response);
+                .status(HttpStatus.FOUND)
+                .header("Location", "/api/v1/health-check.html")
+                .build();
     }
 }

@@ -40,6 +40,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/authenticate").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/test/private").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/health-check.html").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/actuator/health").authenticated()
                         .anyRequest()
                         .authenticated())
                 .addFilterBefore(securityFilterConfig, UsernamePasswordAuthenticationFilter.class)

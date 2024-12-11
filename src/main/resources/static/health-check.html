@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .status-up {
+            color: #28a745;
+        }
+
+        .status-down {
+            color: #dc3545;
+        }
+
+        .status {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .message {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .details {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Health Check Status</h1>
+    <div id="status" class="status"></div>
+    <div id="message" class="message"></div>
+    <div id="details" class="details"></div>
+</div>
+
+<script>
+        function fetchHealthStatus() {
+            fetch('http://localhost:8080/api/v1/actuator/health')
+                .then(response => response.json())
+                .then(data => {
+                    const statusElement = document.getElementById('status');
+                    const messageElement = document.getElementById('message');
+                    const detailsElement = document.getElementById('details');
+
+                    if (data.status === 'UP') {
+                        statusElement.textContent = 'Sistema está Funcionando!';
+                        statusElement.classList.add('status-up');
+                        statusElement.classList.remove('status-down');
+                    } else {
+                        statusElement.textContent = 'Sistema com Problemas!';
+                        statusElement.classList.add('status-down');
+                        statusElement.classList.remove('status-up');
+                    }
+
+                    messageElement.textContent = data.message || 'Sem mensagem adicional.';
+                    detailsElement.textContent = 'Detalhes: ' + JSON.stringify(data.details, null, 2);
+                })
+                .catch(error => {
+                    const statusElement = document.getElementById('status');
+                    const messageElement = document.getElementById('message');
+                    const detailsElement = document.getElementById('details');
+
+                    statusElement.textContent = 'Erro ao verificar saúde';
+                    statusElement.classList.add('status-down');
+                    statusElement.classList.remove('status-up');
+
+                    messageElement.textContent = 'Não foi possível conectar ao servidor.';
+                    detailsElement.textContent = 'Erro: ' + error.message;
+                });
+        }
+
+        window.onload = fetchHealthStatus;
+    </script>
+
+</body>
+</html>
