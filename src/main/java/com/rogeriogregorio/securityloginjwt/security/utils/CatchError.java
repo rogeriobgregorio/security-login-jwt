@@ -5,6 +5,10 @@ import org.springframework.stereotype.Component;
 @Component
 public interface CatchError {
 
+    <T> T run(FunctionWithException<T> method);
+
+    void run(ProcedureWithException method);
+
     @FunctionalInterface
     interface ExceptionCreator {
         RuntimeException create(String errorMessage, Throwable cause);
@@ -19,8 +23,4 @@ public interface CatchError {
     interface ProcedureWithException {
         void run() throws Exception;
     }
-
-    <T> T run(FunctionWithException<T> method);
-
-    void run(ProcedureWithException method);
 }

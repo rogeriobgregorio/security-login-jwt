@@ -13,10 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.TransactionException;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 @Component
 public class CatchErrorImpl implements CatchError {
@@ -42,7 +40,7 @@ public class CatchErrorImpl implements CatchError {
         } catch (Exception ex) {
             throwException(ex);
         }
-        return null;
+        throw new UnexpectedException("Unexpected error occurred");
     }
 
     @Override
@@ -56,19 +54,8 @@ public class CatchErrorImpl implements CatchError {
     }
 
     private void throwException(Exception ex) {
-        String errorMessage = "Error while executing method " + getCallerMethodName() + ": " + ex.getMessage();
-        LOGGER.error(errorMessage, ex);
-        throw EXCEPTION_MAP.getOrDefault(ex.getClass(), UnexpectedException::new).create(errorMessage, ex);
-    }
 
-    private String getCallerMethodName() {
-
-        Set<String> excludedMethods = Set.of("getStackTrace", "getCallerMethodName", "run");
-        return Arrays.stream(Thread.currentThread().getStackTrace())
-                .filter(element -> !excludedMethods.contains(element.getMethodName()))
-                .skip(1)
-                .findFirst()
-                .map(StackTraceElement::getMethodName)
-                .orElse("unidentified");
+        LOGGER.error(ex.getMessage(), ex);
+        throw EXCEPTION_MAP.getOrDefault(ex.getClass(), UnexpectedException::new).create(ex.getMessage(), ex);
     }
 }
