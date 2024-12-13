@@ -1,6 +1,7 @@
 package com.rogeriogregorio.securityloginjwt.security.config;
 
 import com.rogeriogregorio.securityloginjwt.security.dto.UserAuthDetails;
+import com.rogeriogregorio.securityloginjwt.security.exceptions.NotFoundException;
 import com.rogeriogregorio.securityloginjwt.security.repositories.UserRepository;
 import com.rogeriogregorio.securityloginjwt.security.services.TokenService;
 import com.rogeriogregorio.securityloginjwt.security.utils.CatchError;
@@ -54,14 +55,13 @@ public class SecurityFilterConfig extends OncePerRequestFilter {
     private String recoverToken(HttpServletRequest httpServletRequest) {
 
         String authHeader = httpServletRequest.getHeader("Authorization");
-        if (authHeader == null) return null;
-        return authHeader.replace("Bearer ", "");
+        return (authHeader == null) ? null : authHeader.replace("Bearer ", "");
     }
 
     public UserAuthDetails findUserByEmail(String email) {
 
         return catchError.run(() -> userRepository.findByEmail(email))
                 .map(UserAuthDetails::new)
-                .orElseThrow(() -> new RuntimeException("User not found: " + email));
+                .orElseThrow(() -> new NotFoundException("User not found: " + email));
     }
 }
