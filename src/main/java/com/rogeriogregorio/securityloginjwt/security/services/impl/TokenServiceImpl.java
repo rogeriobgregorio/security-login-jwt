@@ -15,7 +15,7 @@ import java.time.temporal.ChronoUnit;
 @Service
 public class TokenServiceImpl implements TokenService {
 
-    private static final String ISSUER_NAME = "ecommerce-manager";
+    private static final String ISSUER_NAME = "security-login-jwt";
     private static final Instant EXPIRY_TIME = Instant.now().plus(2, ChronoUnit.HOURS);
 
     @Value("${api.security.token.secret}")

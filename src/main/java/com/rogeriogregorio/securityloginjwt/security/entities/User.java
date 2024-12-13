@@ -1,6 +1,5 @@
 package com.rogeriogregorio.securityloginjwt.security.entities;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rogeriogregorio.securityloginjwt.security.entities.enums.UserRole;
 import jakarta.persistence.*;
@@ -98,28 +97,6 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User that = (User) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "[User: id= " + id
-                + ", name= " + name
-                + ", email= " + email
-                + ", role= " + role
-                + "]";
-    }
-
     public Builder toBuilder() {
         return new Builder()
                 .withId(this.id)
@@ -167,5 +144,27 @@ public class User implements Serializable {
         public User build() {
             return new User(this);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User that = (User) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "[User: id= " + id
+                + ", name= " + name
+                + ", email= " + email
+                + ", role= " + role
+                + "]";
     }
 }
