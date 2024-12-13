@@ -24,8 +24,7 @@ public class AuthenticationController {
     }
 
     @PostMapping
-    public ResponseEntity<LoginResponse> authenticate(
-            @Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<LoginResponse> authenticate(@Valid @RequestBody LoginRequest loginRequest) {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
