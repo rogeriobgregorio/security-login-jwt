@@ -43,8 +43,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/test/private").authenticated()
                         .requestMatchers(HttpMethod.GET, "/health-check.html").authenticated()
                         .requestMatchers(HttpMethod.GET, "/actuator/health").authenticated()
-                        .anyRequest()
-                        .authenticated())
+                        .anyRequest().authenticated())
                 .addFilterBefore(securityFilterConfig, UsernamePasswordAuthenticationFilter.class)
                 .build());
     }
