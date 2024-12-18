@@ -1,7 +1,7 @@
 # Security Login JWT
 [![Status](https://img.shields.io/badge/Status-Em%20Andamento-yellow.svg)](https://github.com/seu-usuario/seu-projeto)
 
-O **Security Login JWT** é um sistema robusto desenvolvido para fornecer autenticação e autorização em aplicações que exigem controle de acesso. A aplicação permite definir diferentes níveis de acesso, onde os usuários podem acessar rotas específicas dependendo de suas permissões. Construído em Java e no Ecossistema Spring, o sistema prioriza código limpo e a implementação dos princípios SOLID, criando um software flexível, escalável e de fácil manutenção. As tecnologias como Spring Security, JWT, JUnit, Mockito e Log4j2 são utilizadas para garantir a qualidade, segurança e eficiência do sistema.
+O **Security Login JWT** é uma API REST robusta desenvolvida para fornecer autenticação e autorização em aplicações que exigem controle de acesso. A aplicação permite definir diferentes níveis de acesso, onde os usuários podem acessar rotas específicas dependendo de suas permissões. Construído em Java e no Ecossistema Spring, o sistema prioriza código limpo e a implementação dos princípios SOLID, criando um software flexível, escalável e de fácil manutenção. As tecnologias como Spring Security, JWT, JUnit, Mockito e Log4j2 são utilizadas para garantir a qualidade, segurança e eficiência do sistema.
 
 ## Demonstração
 #### Assista ao vídeo demonstrativo:
