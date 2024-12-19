@@ -14,7 +14,7 @@ public class TestController {
     public ResponseEntity<String> test() {
 
         return ResponseEntity
-                .status(HttpStatus.FOUND)
+                .status(HttpStatus.OK)
                 .header("Location", "/api/v1/health-check.html")
                 .build();
     }

@@ -4,9 +4,9 @@ public enum UserRole {
 
     ADMIN("ADMIN"),
     MANAGER("MANAGER"),
-    CLIENT("CLIENT");
+    USER("USER");
 
-    private String role;
+    private final String role;
 
     UserRole(String role){
         this.role = role;

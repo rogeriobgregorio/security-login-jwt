@@ -159,6 +159,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 
+    @ExceptionHandler(PasswordException.class)
+    public ResponseEntity<ErrorDetails> handlePasswordException(PasswordException ex) {
+
+        ErrorDetails error = new ErrorDetails(HttpStatus.BAD_REQUEST,
+                "PasswordException: the password does not comply with the security protocol", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorDetails> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
 

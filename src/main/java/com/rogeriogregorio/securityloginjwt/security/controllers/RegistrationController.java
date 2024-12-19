@@ -28,6 +28,6 @@ public class RegistrationController {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(userService.registerUser(userRequest));
+                .body(userService.createUser(userRequest));
     }
 }

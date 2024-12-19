@@ -68,7 +68,7 @@ public class UserServiceImplTest {
         when(dataMapper.map(user, UserResponse.class)).thenReturn(expectedResponse);
 
         // Act
-        UserResponse actualResponse = userService.registerUser(userRequest);
+        UserResponse actualResponse = userService.createUser(userRequest);
 
         // Assert
         assertNotNull(actualResponse, "User should not be null");

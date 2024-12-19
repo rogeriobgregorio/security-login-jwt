@@ -18,9 +18,8 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private UUID id;
+    @Column(name = "id", columnDefinition = "VARCHAR(36)")
+    private String id;
 
     @Column(name = "name")
     @NotBlank(message = "The name must not be blank.")
@@ -37,30 +36,32 @@ public class User implements Serializable {
     @NotBlank(message = "The password must not be blank.")
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
     @NotNull(message = "The user role cannot be null.")
     private UserRole role;
 
     public User() {
+        this.id = UUID.randomUUID().toString();
     }
 
     private User(Builder builder) {
-        setId(builder.id);
-        setName(builder.name);
-        setEmail(builder.email);
-        setPassword(builder.password);
-        setRole(builder.role);
+        this.id = (builder.id != null) ? builder.id : UUID.randomUUID().toString();
+        this.name = builder.name;
+        this.email = builder.email;
+        this.password = builder.password;
+        this.role = builder.role;
     }
 
     public static Builder newBuilder() {
         return new Builder();
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -107,7 +108,7 @@ public class User implements Serializable {
     }
 
     public static final class Builder {
-        private UUID id;
+        private String id = UUID.randomUUID().toString();
         private String name;
         private String email;
         private String password;
@@ -116,7 +117,7 @@ public class User implements Serializable {
         private Builder() {
         }
 
-        public Builder withId(UUID id) {
+        public Builder withId(String id) {
             this.id = id;
             return this;
         }

@@ -40,7 +40,7 @@ public class AuthorizationServiceImplTest {
                 .withName("user")
                 .withEmail("user@example.com")
                 .withPassword("password")
-                .withRole(UserRole.CLIENT)
+                .withRole(UserRole.USER)
                 .build();
 
         when(userRepository.findByEmail("user@example.com")).thenReturn(Optional.of(user));

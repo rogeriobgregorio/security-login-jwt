@@ -7,10 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class UserAuthDetails implements UserDetails {
 
@@ -24,12 +21,23 @@ public class UserAuthDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        Map<UserRole, SimpleGrantedAuthority> roleAuthorityMap = new HashMap<>();
-        roleAuthorityMap.put(UserRole.CLIENT, new SimpleGrantedAuthority("ROLE_CLIENT"));
+        Map<UserRole, SimpleGrantedAuthority> roleAuthorityMap = new EnumMap<>(UserRole.class);
+        roleAuthorityMap.put(UserRole.USER, new SimpleGrantedAuthority("ROLE_USER"));
         roleAuthorityMap.put(UserRole.MANAGER, new SimpleGrantedAuthority("ROLE_MANAGER"));
         roleAuthorityMap.put(UserRole.ADMIN, new SimpleGrantedAuthority("ROLE_ADMIN"));
 
         return Collections.<GrantedAuthority>singleton(roleAuthorityMap.get(user.getRole()));
+    }
+
+    public String getRole() {
+        return getAuthorities()
+                .iterator()
+                .next()
+                .getAuthority();
+    }
+
+    public String getUserId() {
+        return user.getId();
     }
 
     @Override
