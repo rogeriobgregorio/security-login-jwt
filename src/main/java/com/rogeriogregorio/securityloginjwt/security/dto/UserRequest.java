@@ -4,44 +4,29 @@ import com.rogeriogregorio.securityloginjwt.security.entities.enums.UserRole;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.UUID;
 
 public class UserRequest implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private UUID id;
     private String name;
     private String email;
-    private String phone;
-    private String cpf;
     private String password;
-    private UserRole userRole;
+    private UserRole role;
 
     public UserRequest() {
     }
 
-    public UserRequest(UUID id, String name,
-                       String email, String phone,
-                       String cpf, String password,
-                       UserRole userRole) {
-
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.cpf = cpf;
-        this.password = password;
-        this.userRole = userRole;
+    private UserRequest(Builder builder) {
+        setName(builder.name);
+        setEmail(builder.email);
+        setPassword(builder.password);
+        setRole(builder.role);
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
+    public static Builder newBuilder() {
+        return new Builder();
     }
 
     public String getName() {
@@ -60,22 +45,6 @@ public class UserRequest implements Serializable {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -84,11 +53,54 @@ public class UserRequest implements Serializable {
         this.password = password;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
+    public UserRole getRole() {
+        return role;
     }
 
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public Builder toBuilder() {
+
+        return new Builder()
+                .withName(this.name)
+                .withEmail(this.email)
+                .withPassword(this.password)
+                .withRole(this.role);
+    }
+
+    public static final class Builder {
+        private String name;
+        private String email;
+        private String password;
+        private UserRole role;
+
+        private Builder() {
+        }
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder withPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder withRole(UserRole role) {
+            this.role = role;
+            return this;
+        }
+
+        public UserRequest build() {
+            return new UserRequest(this);
+        }
     }
 }
