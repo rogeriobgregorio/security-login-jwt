@@ -108,7 +108,7 @@ public class User implements Serializable {
     }
 
     public static final class Builder {
-        private String id = UUID.randomUUID().toString();
+        private String id;
         private String name;
         private String email;
         private String password;
