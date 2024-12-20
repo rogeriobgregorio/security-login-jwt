@@ -11,27 +11,30 @@ public class UserResponse implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private UUID id;
+    private String id;
     private String name;
     private String email;
-    private UserRole userRole;
+    private UserRole role;
 
     public UserResponse() {
     }
 
-    public UserResponse(UUID id, String name, String email, UserRole userRole) {
-
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.userRole = userRole;
+    private UserResponse(Builder builder) {
+        setId(builder.id);
+        setName(builder.name);
+        setEmail(builder.email);
+        setRole(builder.role);
     }
 
-    public UUID getId() {
+    public static Builder newBuilder() {
+        return new Builder();
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -51,11 +54,54 @@ public class UserResponse implements Serializable {
         this.email = email;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
+    public UserRole getRole() {
+        return role;
     }
 
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public Builder toBuilder() {
+
+        return new Builder()
+                .withId(this.id)
+                .withName(this.name)
+                .withEmail(this.email)
+                .withRole(this.role);
+    }
+
+    public static final class Builder {
+        private String id;
+        private String name;
+        private String email;
+        private UserRole role;
+
+        private Builder() {
+        }
+
+        public Builder withId(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder withRole(UserRole role) {
+            this.role = role;
+            return this;
+        }
+
+        public UserResponse build() {
+            return new UserResponse(this);
+        }
     }
 }
