@@ -1,8 +1,14 @@
 package com.rogeriogregorio.securityloginjwt.security.controllers;
 
+import com.rogeriogregorio.securityloginjwt.security.dto.LoginResponse;
 import com.rogeriogregorio.securityloginjwt.security.dto.UserRequest;
 import com.rogeriogregorio.securityloginjwt.security.dto.UserResponse;
 import com.rogeriogregorio.securityloginjwt.security.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +29,14 @@ public class RegistrationController {
         this.userService = userService;
     }
 
+    @Operation(summary = "Registrar usuário", description = "Endpoint para registrar usuário")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Registro realizado com sucesso",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = LoginResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Usuário já registrado"),
+            @ApiResponse(responseCode = "500", description = "Erro ao tentar registrar")
+    })
     @PostMapping
     public ResponseEntity<UserResponse> register(@Valid @RequestBody UserRequest userRequest) {
 
