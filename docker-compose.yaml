@@ -1,0 +1,29 @@
+version: "3.9" # Define a versão do Docker Compose usada. A versão 3.9 é compatível com as versões mais recentes do Docker.
+
+services: # Declara os serviços que serão executados no Docker.
+  app: # Serviço da aplicação principal (API em Java/Spring Boot).
+    build: # Define como construir a imagem da aplicação.
+      context: . # O contexto de build é o diretório atual (onde está o Dockerfile).
+      dockerfile: Dockerfile # Especifica o arquivo Dockerfile para criar a imagem.
+    ports: # Configura o mapeamento de portas entre o container e o host.
+      - "8080:8080" # A porta 8080 do host será mapeada para a porta 8080 do container.
+    environment: # Define variáveis de ambiente usadas pela aplicação.
+      - JWT_SECRET=my-secret-key # Chave secreta para geração de tokens JWT.
+      - PASSWORD_SECRET=admin-password # Segredo usado para criptografia de senhas.
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/security_db # URL de conexão com o banco de dados PostgreSQL.
+      - SPRING_DATASOURCE_USERNAME=admin # Nome de usuário do banco de dados.
+      - SPRING_DATASOURCE_PASSWORD=admin # Senha do banco de dados.
+
+  db: # Serviço do banco de dados PostgreSQL.
+    image: postgres:15 # Especifica a imagem do PostgreSQL na versão 15.
+    environment: # Configura variáveis de ambiente específicas para o PostgreSQL.
+      POSTGRES_DB: security_db # Nome do banco de dados a ser criado.
+      POSTGRES_USER: admin # Nome de usuário do banco de dados.
+      POSTGRES_PASSWORD: admin # Senha do usuário do banco de dados.
+    ports: # Configura o mapeamento de portas para o banco de dados.
+      - "5432:5432" # A porta 5432 do host será mapeada para a porta 5432 do container.
+    volumes: # Configura volumes para persistência de dados.
+      - postgres_data:/var/lib/postgresql/data # Salva os dados do PostgreSQL no volume `postgres_data`.
+
+volumes: # Declara volumes para o projeto.
+  postgres_data: # Volume para armazenar os dados do banco de forma persistente.
