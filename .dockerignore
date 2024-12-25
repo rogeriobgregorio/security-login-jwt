@@ -1,0 +1,7 @@
+# Ignorar diretórios e arquivos desnecessários
+documentation/
+target/
+.mvn/
+.git/
+*.log
+*.md
