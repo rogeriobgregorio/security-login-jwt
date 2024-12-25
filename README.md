@@ -17,13 +17,14 @@ Em muitas aplicações, a gestão de autenticação e autorização de usuários
 - Registro de usuários: Permite o cadastro de novos usuários no sistema.
 - Login: Realiza a autenticação do usuário por meio de um processo seguro, utilizando JWT.
 - Controle de acesso baseado em roles: O sistema permite definir diferentes níveis de acesso, onde os usuários podem acessar rotas específicas dependendo de suas permissões e roles.
-- Gestão de roles por administradores: Administradores têm a capacidade de alterar as roles dos usuários, podendo promover um usuário comum a administrador ou reverter a alteração para um status de usuário comum a qualquer momento.
+- Gestão de roles por administradores: Administradores conseguem alterar as roles dos usuários, podendo promover um usuário comum a administrador ou reverter a alteração para um status de usuário comum a qualquer momento.
 - Segurança: A autenticação é realizada com tokens JWT, garantindo que cada requisição seja validada de forma segura.
 
 
 ## Modelo Conceitual
 **Diagrama Entidade-Relacionamento**
-![-der](https://github.com/rogeriobgregorio/.png)
+
+![der](https://github.com/rogeriobgregorio/security-login-jwt/blob/main/documentation/der.png)
 
 ## Stack utilizada
 **Back-end:**
@@ -35,6 +36,7 @@ Em muitas aplicações, a gestão de autenticação e autorização de usuários
 - JWT
 - Junit
 - Mockito
+- Docker
 
 **Front-end:**
 - HTML5
@@ -42,7 +44,7 @@ Em muitas aplicações, a gestão de autenticação e autorização de usuários
 - Javascript
 
 **Banco de Dados:**
-- SQL Server
+- PostgreSQL
 
 
 ## Documentação
