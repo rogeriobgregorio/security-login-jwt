@@ -23,11 +23,10 @@ public class TestController {
                             schema = @Schema(implementation = LoginResponse.class))),
             @ApiResponse(responseCode = "500", description = "O teste não obteve sucesso")
     })
-    @GetMapping("/private")
-    public ResponseEntity<String> test() {
-
+    @GetMapping
+    public ResponseEntity<Void> test() {
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(HttpStatus.FOUND)
                 .header("Location", "/api/v1/health-check.html")
                 .build();
     }
