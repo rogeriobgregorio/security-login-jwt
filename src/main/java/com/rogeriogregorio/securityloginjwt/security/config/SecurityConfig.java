@@ -38,11 +38,12 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.GET,"/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/authenticate").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/test/private").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/health-check.html").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/actuator/health").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/test").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/health-check.html").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/actuator/health").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilterConfig, UsernamePasswordAuthenticationFilter.class)
                 .build());
