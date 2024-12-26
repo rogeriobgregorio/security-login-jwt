@@ -23,12 +23,11 @@ public class CustomHealthCheck implements HealthIndicator {
 
     @Override
     public Health health() {
-
         boolean databaseIsUp = checkDatabaseConnection();
-        Health databaseUp = Health.up().withDetail("database", "up").build();
-        Health databaseDown = Health.down().withDetail("database", "down").build();
 
-        return databaseIsUp ? databaseUp : databaseDown;
+        return databaseIsUp
+                ? Health.up().withDetail("database", "up").build()
+                : Health.down().withDetail("database", "down").build();
     }
 
     private boolean checkDatabaseConnection() {
