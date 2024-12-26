@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/register")
+@RequestMapping(value = "/register", produces = {"application/json"})
+@Tag(name = "Register API", description = "API para registrar usuários")
 public class RegistrationController {
 
     private final UserService userService;
@@ -33,7 +35,7 @@ public class RegistrationController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Registro realizado com sucesso",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = LoginResponse.class))),
+                            schema = @Schema(implementation = UserResponse.class))),
             @ApiResponse(responseCode = "400", description = "Usuário já registrado"),
             @ApiResponse(responseCode = "500", description = "Erro ao tentar registrar")
     })

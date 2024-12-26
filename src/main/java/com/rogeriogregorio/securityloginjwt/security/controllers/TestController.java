@@ -1,11 +1,10 @@
 package com.rogeriogregorio.securityloginjwt.security.controllers;
 
-import com.rogeriogregorio.securityloginjwt.security.dto.LoginResponse;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,15 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping(value = "/test")
+@Tag(name = "Test API", description = "API para testar conexão com banco de dados")
 public class TestController {
 
-    @Operation(summary = "Teste", description = "Endpoint para teste")
+    @Operation(summary = "Teste", description = "Endpoint para teste de redirecionamento")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "O teste obteve sucesso",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = LoginResponse.class))),
-            @ApiResponse(responseCode = "500", description = "O teste não obteve sucesso")
+            @ApiResponse(responseCode = "302", description = "Redirecionamento para o health-check",
+                    headers = @Header(name = "Location", description = "URL de redirecionamento para o health-check"))
     })
     @GetMapping
     public ResponseEntity<Void> test() {
@@ -31,3 +29,4 @@ public class TestController {
                 .build();
     }
 }
+

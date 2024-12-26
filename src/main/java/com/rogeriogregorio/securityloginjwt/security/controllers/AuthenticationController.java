@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/authenticate")
+@RequestMapping(value = "/authenticate", produces = {"application/json"})
+@Tag(name = "Authentication API", description = "API para autenticar usuários")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
@@ -30,11 +32,11 @@ public class AuthenticationController {
 
     @Operation(summary = "Autenticar usuário", description = "Endpoint para autenticar usuário")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Login realizado com sucesso",
+            @ApiResponse(responseCode = "200", description = "Autenticação realizada com sucesso",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = LoginResponse.class))),
             @ApiResponse(responseCode = "401", description = "Credenciais inválidas"),
-            @ApiResponse(responseCode = "500", description = "Erro ao tentar logar")
+            @ApiResponse(responseCode = "500", description = "Erro ao tentar autenticar")
     })
     @PostMapping
     public ResponseEntity<LoginResponse> authenticate(@Valid @RequestBody LoginRequest loginRequest) {
