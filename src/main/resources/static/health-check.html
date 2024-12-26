@@ -11,21 +11,30 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
 
         .container {
             text-align: center;
             background-color: #fff;
-            padding: 40px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            max-width: 600px;
+            width: 100%;
         }
 
         h1 {
             color: #333;
+            margin-bottom: 20px;
+        }
+
+        .status {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
         .status-up {
@@ -36,18 +45,36 @@
             color: #dc3545;
         }
 
-        .status {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
         .message {
             font-size: 18px;
-            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .component {
+            text-align: left;
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .component h2 {
+            font-size: 18px;
+            color: #333;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+
+        .component .status-up {
+            color: #28a745;
+        }
+
+        .component .status-down {
+            color: #dc3545;
         }
 
         .details {
-            margin-top: 20px;
             font-size: 14px;
             color: #666;
         }
@@ -59,47 +86,81 @@
     <h1>Health Check Status</h1>
     <div id="status" class="status"></div>
     <div id="message" class="message"></div>
-    <div id="details" class="details"></div>
+    <div id="components"></div>
 </div>
 
 <script>
-        function fetchHealthStatus() {
-            fetch('http://localhost:8080/api/v1/actuator/health')
-                .then(response => response.json())
-                .then(data => {
-                    const statusElement = document.getElementById('status');
-                    const messageElement = document.getElementById('message');
-                    const detailsElement = document.getElementById('details');
+    function fetchHealthStatus() {
+        fetch('http://localhost:8080/api/v1/actuator/health')
+            .then(response => response.json())
+            .then(data => {
+                const statusElement = document.getElementById('status');
+                const messageElement = document.getElementById('message');
+                const componentsElement = document.getElementById('components');
 
-                    if (data.status === 'UP') {
-                        statusElement.textContent = 'Sistema está Funcionando!';
-                        statusElement.classList.add('status-up');
-                        statusElement.classList.remove('status-down');
-                    } else {
-                        statusElement.textContent = 'Sistema com Problemas!';
-                        statusElement.classList.add('status-down');
-                        statusElement.classList.remove('status-up');
-                    }
-
-                    messageElement.textContent = data.message || 'Sem mensagem adicional.';
-                    detailsElement.textContent = 'Detalhes: ' + JSON.stringify(data.details, null, 2);
-                })
-                .catch(error => {
-                    const statusElement = document.getElementById('status');
-                    const messageElement = document.getElementById('message');
-                    const detailsElement = document.getElementById('details');
-
-                    statusElement.textContent = 'Erro ao verificar saúde';
+                // Status geral
+                if (data.status === 'UP') {
+                    statusElement.textContent = 'Sistema Funcionando';
+                    statusElement.classList.add('status-up');
+                    statusElement.classList.remove('status-down');
+                } else {
+                    statusElement.textContent = 'Sistema com Problemas';
                     statusElement.classList.add('status-down');
                     statusElement.classList.remove('status-up');
+                }
 
-                    messageElement.textContent = 'Não foi possível conectar ao servidor.';
-                    detailsElement.textContent = 'Erro: ' + error.message;
-                });
+                // Mensagem geral
+                messageElement.textContent = 'Detalhes dos componentes:';
+
+                // Processa os componentes
+                if (data.components) {
+                    const components = data.components;
+                    let componentsHtml = '';
+
+                    for (const [key, component] of Object.entries(components)) {
+                        componentsHtml += `
+                            <div class="component">
+                                <h2>${key}</h2>
+                                <p>Status: <span class="${component.status === 'UP' ? 'status-up' : 'status-down'}">
+                                    ${component.status === 'UP' ? 'Funcionando' : 'Com Problemas'}
+                                </span></p>
+                                <div class="details">
+                                    ${generateReadableDetails(component.details)}
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    componentsElement.innerHTML = componentsHtml;
+                } else {
+                    componentsElement.innerHTML = '<p class="details">Nenhum detalhe disponível.</p>';
+                }
+            })
+            .catch(error => {
+                const statusElement = document.getElementById('status');
+                const messageElement = document.getElementById('message');
+                const componentsElement = document.getElementById('components');
+
+                statusElement.textContent = 'Erro ao verificar saúde';
+                statusElement.classList.add('status-down');
+                statusElement.classList.remove('status-up');
+
+                messageElement.textContent = 'Não foi possível conectar ao servidor.';
+                componentsElement.innerHTML = `<p class="details">Erro: ${error.message}</p>`;
+            });
+    }
+
+    function generateReadableDetails(details) {
+        if (!details) return 'Sem detalhes disponíveis.';
+        let readableDetails = '';
+        for (const [key, value] of Object.entries(details)) {
+            readableDetails += `<p><strong>${key}:</strong> ${value}</p>`;
         }
+        return readableDetails;
+    }
 
-        window.onload = fetchHealthStatus;
-    </script>
+    window.onload = fetchHealthStatus;
+</script>
 
 </body>
 </html>
