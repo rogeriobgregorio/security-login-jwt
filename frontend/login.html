@@ -43,9 +43,40 @@
           },
           body: JSON.stringify({ email, password }),
       })
-      .then(response => response.json())
-      .then(data => alert('Login successful!'))
-      .catch(error => alert('Error: ' + error));
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Erro na autenticação');
+          }
+          return response.json();
+      })
+      .then(data => {
+          if (data.token) {
+              localStorage.setItem('token', data.token); // Armazena o token, se necessário
+
+              // Após login bem-sucedido, chamar o endpoint /test
+              return fetch('http://localhost:8080/test', {
+                  method: 'GET',
+                  headers: {
+                      'Authorization': `Bearer ${data.token}` // Enviar token no cabeçalho, se necessário
+                  }
+              });
+          } else {
+              throw new Error('Token inválido');
+          }
+      })
+      .then(response => {
+          if (response.status === 302) {
+              const location = response.headers.get('Location');
+              if (location) {
+                  window.location.href = location; // Redireciona o usuário
+              } else {
+                  throw new Error('Redirecionamento não encontrado');
+              }
+          } else {
+              throw new Error('Resposta inesperada do servidor');
+          }
+      })
+      .catch(error => alert('Erro: ' + error.message));
   }
 </script>
 
