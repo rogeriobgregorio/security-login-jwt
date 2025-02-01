@@ -32,51 +32,39 @@
 </div>
 
 <script>
-  function submitLoginForm() {
+  async function submitLoginForm() {
       const email = document.getElementById('loginEmail').value;
       const password = document.getElementById('loginPassword').value;
 
-      fetch('http://localhost:8080/api/v1/authenticate', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password }),
-      })
-      .then(response => {
-          if (!response.ok) {
-              throw new Error('Erro na autenticação');
-          }
-          return response.json();
-      })
-      .then(data => {
-          if (data.token) {
-              localStorage.setItem('token', data.token); // Armazena o token, se necessário
+      try {
+          const authResponse = await fetch('http://localhost:8080/api/v1/authenticate', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ email, password }),
+          });
 
-              // Após login bem-sucedido, chamar o endpoint /test
-              return fetch('http://localhost:8080/test', {
-                  method: 'GET',
-                  headers: {
-                      'Authorization': `Bearer ${data.token}` // Enviar token no cabeçalho, se necessário
-                  }
-              });
-          } else {
-              throw new Error('Token inválido');
+          if (!authResponse.ok) {
+              const errorText = await authResponse.text();
+              throw new Error(`Erro na autenticação: ${errorText}`);
           }
-      })
-      .then(response => {
-          if (response.status === 302) {
-              const location = response.headers.get('Location');
-              if (location) {
-                  window.location.href = location; // Redireciona o usuário
-              } else {
-                  throw new Error('Redirecionamento não encontrado');
-              }
-          } else {
-              throw new Error('Resposta inesperada do servidor');
+
+          const authData = await authResponse.json();
+
+          if (!authData.token) {
+              throw new Error('Token inválido ou não recebido.');
           }
-      })
-      .catch(error => alert('Erro: ' + error.message));
+
+          // Armazena o token (caso precise em requisições futuras)
+          localStorage.setItem('token', authData.token);
+
+          // Redirecionamento direto para /test sem usar fetch
+          window.location.href = 'http://localhost:8080/api/v1/test';
+
+      } catch (error) {
+          alert('Erro: ' + error.message);
+      }
   }
 </script>
 
