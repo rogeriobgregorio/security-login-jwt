@@ -219,3 +219,126 @@ insert into tb_users (email,name,password,role,id) values (?,?,?,?,?) [23505-224
 2025-02-01T01:00:16,617 WARN  org.springframework.beans.factory.support.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
 2025-02-01T01:00:16,618 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2025-02-01T01:00:16,621 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-02-01T22:05:02,623 INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-02-01T22:05:02,659 INFO  com.rogeriogregorio.securityloginjwt.SecurityLoginJwtApplication - Starting SecurityLoginJwtApplication using Java 17.0.13 with PID 20427 (/home/rogerio/projetos/security-login-jwt/target/classes started by rogerio in /home/rogerio/projetos/security-login-jwt)
+2025-02-01T22:05:02,661 DEBUG com.rogeriogregorio.securityloginjwt.SecurityLoginJwtApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+2025-02-01T22:05:02,662 INFO  com.rogeriogregorio.securityloginjwt.SecurityLoginJwtApplication - The following 1 profile is active: "test"
+2025-02-01T22:05:02,706 INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-02-01T22:05:02,707 INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-02-01T22:05:03,672 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-02-01T22:05:03,724 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 43 ms. Found 1 JPA repository interface.
+2025-02-01T22:05:04,427 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-02-01T22:05:04,434 INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-01T22:05:04,437 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-01T22:05:04,437 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2025-02-01T22:05:04,477 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2025-02-01T22:05:04,479 INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1769 ms
+2025-02-01T22:05:04,766 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-02-01T22:05:04,831 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-02-01T22:05:04,864 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-02-01T22:05:05,136 INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-02-01T22:05:05,159 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-02-01T22:05:05,312 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2025-02-01T22:05:05,313 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-02-01T22:05:05,334 WARN  org.hibernate.dialect.Dialect - HHH000511: The 2.2.224 version for [org.hibernate.dialect.PostgreSQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 12.0.0. Check the community dialects project for available legacy versions.
+2025-02-01T22:05:05,340 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-02-01T22:05:06,153 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-02-01T22:05:06,206 INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-02-01T22:05:06,598 DEBUG com.rogeriogregorio.securityloginjwt.security.config.SecurityFilterConfig - Filter 'securityFilterConfig' configured for use
+2025-02-01T22:05:06,928 INFO  org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name authorizationServiceImpl
+2025-02-01T22:05:07,599 INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-02-01T22:05:07,688 DEBUG org.springframework.security.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, SecurityFilterConfig, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-02-01T22:05:08,206 INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-02-01T22:05:08,256 INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-01T22:05:08,269 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/api/v1'
+2025-02-01T22:05:08,288 INFO  com.rogeriogregorio.securityloginjwt.SecurityLoginJwtApplication - Started SecurityLoginJwtApplication in 5.982 seconds (process running for 6.842)
+2025-02-01T22:07:37,516 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-02-01T22:07:37,518 INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-02-01T22:07:37,519 INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-02-01T22:07:37,548 DEBUG org.springframework.security.web.FilterChainProxy - Securing GET /test
+2025-02-01T22:07:37,562 DEBUG org.springframework.security.web.authentication.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-02-01T22:07:37,568 DEBUG org.springframework.security.web.FilterChainProxy - Secured GET /test
+2025-02-01T22:07:37,631 DEBUG org.springframework.security.web.FilterChainProxy - Securing GET /health-check.html
+2025-02-01T22:07:37,632 DEBUG org.springframework.security.web.authentication.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-02-01T22:07:37,634 DEBUG org.springframework.security.web.FilterChainProxy - Secured GET /health-check.html
+2025-02-01T22:07:37,683 DEBUG org.springframework.security.web.FilterChainProxy - Securing GET /actuator/health
+2025-02-01T22:07:37,684 DEBUG org.springframework.security.web.authentication.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-02-01T22:07:37,685 DEBUG org.springframework.security.web.FilterChainProxy - Secured GET /actuator/health
+2025-02-01T22:08:09,015 INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-02-01T22:08:09,022 WARN  org.springframework.beans.factory.support.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
+2025-02-01T22:08:09,023 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-02-01T22:08:09,027 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-02-01T22:40:14,413 INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-02-01T22:40:14,452 INFO  com.rogeriogregorio.securityloginjwt.SecurityLoginJwtApplication - Starting SecurityLoginJwtApplication using Java 17.0.13 with PID 33622 (/home/rogerio/projetos/security-login-jwt/target/classes started by rogerio in /home/rogerio/projetos/security-login-jwt)
+2025-02-01T22:40:14,455 DEBUG com.rogeriogregorio.securityloginjwt.SecurityLoginJwtApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+2025-02-01T22:40:14,456 INFO  com.rogeriogregorio.securityloginjwt.SecurityLoginJwtApplication - The following 1 profile is active: "test"
+2025-02-01T22:40:14,511 INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-02-01T22:40:14,511 INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-02-01T22:40:15,567 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-02-01T22:40:15,621 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 43 ms. Found 1 JPA repository interface.
+2025-02-01T22:40:16,278 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-02-01T22:40:16,286 INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-01T22:40:16,289 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-01T22:40:16,290 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2025-02-01T22:40:16,329 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2025-02-01T22:40:16,331 INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1818 ms
+2025-02-01T22:40:16,603 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-02-01T22:40:16,663 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-02-01T22:40:16,695 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-02-01T22:40:16,968 INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-02-01T22:40:16,997 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-02-01T22:40:17,142 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2025-02-01T22:40:17,143 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-02-01T22:40:17,169 WARN  org.hibernate.dialect.Dialect - HHH000511: The 2.2.224 version for [org.hibernate.dialect.PostgreSQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 12.0.0. Check the community dialects project for available legacy versions.
+2025-02-01T22:40:17,176 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-02-01T22:40:17,813 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-02-01T22:40:17,854 INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-02-01T22:40:18,158 DEBUG com.rogeriogregorio.securityloginjwt.security.config.SecurityFilterConfig - Filter 'securityFilterConfig' configured for use
+2025-02-01T22:40:18,441 INFO  org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name authorizationServiceImpl
+2025-02-01T22:40:19,007 INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-02-01T22:40:19,070 DEBUG org.springframework.security.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, SecurityFilterConfig, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-02-01T22:40:19,470 INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-02-01T22:40:19,508 INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-01T22:40:19,521 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/api/v1'
+2025-02-01T22:40:19,537 INFO  com.rogeriogregorio.securityloginjwt.SecurityLoginJwtApplication - Started SecurityLoginJwtApplication in 5.517 seconds (process running for 6.355)
+2025-02-01T22:40:21,890 INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-02-01T22:40:21,900 WARN  org.springframework.beans.factory.support.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
+2025-02-01T22:40:21,901 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-02-01T22:40:21,903 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-02-01T22:40:25,330 INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-02-01T22:40:25,356 INFO  com.rogeriogregorio.securityloginjwt.SecurityLoginJwtApplication - Starting SecurityLoginJwtApplication using Java 17.0.13 with PID 34143 (/home/rogerio/projetos/security-login-jwt/target/classes started by rogerio in /home/rogerio/projetos/security-login-jwt)
+2025-02-01T22:40:25,360 DEBUG com.rogeriogregorio.securityloginjwt.SecurityLoginJwtApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+2025-02-01T22:40:25,361 INFO  com.rogeriogregorio.securityloginjwt.SecurityLoginJwtApplication - The following 1 profile is active: "test"
+2025-02-01T22:40:25,415 INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-02-01T22:40:25,415 INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-02-01T22:40:26,360 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-02-01T22:40:26,409 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 43 ms. Found 1 JPA repository interface.
+2025-02-01T22:40:27,057 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-02-01T22:40:27,068 INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-01T22:40:27,071 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-01T22:40:27,071 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2025-02-01T22:40:27,112 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2025-02-01T22:40:27,115 INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1697 ms
+2025-02-01T22:40:27,373 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-02-01T22:40:27,414 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-02-01T22:40:27,442 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-02-01T22:40:27,640 INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-02-01T22:40:27,660 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-02-01T22:40:27,787 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2025-02-01T22:40:27,788 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-02-01T22:40:27,811 WARN  org.hibernate.dialect.Dialect - HHH000511: The 2.2.224 version for [org.hibernate.dialect.PostgreSQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 12.0.0. Check the community dialects project for available legacy versions.
+2025-02-01T22:40:27,815 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-02-01T22:40:28,432 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-02-01T22:40:28,474 INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-02-01T22:40:28,784 DEBUG com.rogeriogregorio.securityloginjwt.security.config.SecurityFilterConfig - Filter 'securityFilterConfig' configured for use
+2025-02-01T22:40:29,066 INFO  org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name authorizationServiceImpl
+2025-02-01T22:40:29,949 INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-02-01T22:40:30,054 DEBUG org.springframework.security.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, SecurityFilterConfig, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-02-01T22:40:30,578 INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-02-01T22:40:30,626 INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-01T22:40:30,639 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/api/v1'
+2025-02-01T22:40:30,659 INFO  com.rogeriogregorio.securityloginjwt.SecurityLoginJwtApplication - Started SecurityLoginJwtApplication in 5.681 seconds (process running for 6.405)
+2025-02-01T22:41:04,869 INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-02-01T22:41:04,873 WARN  org.springframework.beans.factory.support.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
+2025-02-01T22:41:04,873 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-02-01T22:41:04,876 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
