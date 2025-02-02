@@ -15,7 +15,7 @@
         <div class="card-body">
             <p class="lead" id="welcomeMessage">Carregando...</p>
             <div id="authButtons">
-                <!-- Os botões serão preenchidos dinamicamente pelo JS -->
+                <!-- Botões serão preenchidos dinamicamente pelo JS -->
             </div>
         </div>
     </div>
@@ -44,7 +44,8 @@
 
     function logout() {
         localStorage.removeItem('token');
-        window.location.reload();
+        alert('Você saiu com sucesso!');
+        window.location.href = 'login.html';
     }
 
     window.onload = checkAuth;
