@@ -17,17 +17,23 @@
       <form id="loginForm">
         <div class="mb-3">
           <label for="loginEmail" class="form-label">Email</label>
-          <input type="email" class="form-control" id="loginEmail" placeholder="Your Email" required>
+          <input type="email" class="form-control" id="loginEmail" placeholder="Seu Email" required>
         </div>
         <div class="mb-3">
-          <label for="loginPassword" class="form-label">Password</label>
-          <input type="password" class="form-control" id="loginPassword" placeholder="Your Password" required>
+          <label for="loginPassword" class="form-label">Senha</label>
+          <input type="password" class="form-control" id="loginPassword" placeholder="Sua Senha" required>
         </div>
         <div class="d-grid">
-          <button type="button" class="btn btn-success" onclick="submitLoginForm()">Login</button>
+          <button type="button" class="btn btn-success" onclick="submitLoginForm()">Entrar</button>
         </div>
       </form>
     </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="text-center mt-3">
+    <a href="index.html" class="btn btn-secondary">Voltar para Home</a>
+    <a href="register.html" class="btn btn-primary ms-2">Criar Conta</a>
   </div>
 </div>
 
@@ -56,10 +62,8 @@
               throw new Error('Token inválido ou não recebido.');
           }
 
-          // Armazena o token (caso precise em requisições futuras)
           localStorage.setItem('token', authData.token);
 
-          // Redirecionamento direto para /test sem usar fetch
           window.location.href = 'http://localhost:8080/api/v1/test';
 
       } catch (error) {
