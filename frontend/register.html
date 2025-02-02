@@ -11,27 +11,33 @@
     <!-- Registration Form -->
     <div class="card shadow mb-4">
         <div class="card-header text-center bg-primary text-white">
-            <h2>Register</h2>
+            <h2>Registrar</h2>
         </div>
         <div class="card-body">
             <form id="registerForm">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="name" placeholder="Seu Nome" required>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+                    <input type="email" class="form-control" id="email" placeholder="Seu Email" required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Your Password" required>
+                    <label for="password" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="password" placeholder="Sua Senha" required>
                 </div>
                 <div class="d-grid">
-                    <button type="button" class="btn btn-primary" onclick="submitRegisterForm()">Register</button>
+                    <button type="button" class="btn btn-primary" onclick="submitRegisterForm()">Registrar</button>
                 </div>
             </form>
         </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="text-center">
+        <a href="index.html" class="btn btn-secondary">Voltar para Home</a>
+        <a href="login.html" class="btn btn-success ms-2">Já tem conta? Faça Login</a>
     </div>
 </div>
 
@@ -49,8 +55,8 @@
             body: JSON.stringify({ name, email, password }),
         })
         .then(response => response.json())
-        .then(data => alert('Registration successful!'))
-        .catch(error => alert('Error: ' + error));
+        .then(data => alert('Registro bem-sucedido!'))
+        .catch(error => alert('Erro: ' + error));
     }
 </script>
 
