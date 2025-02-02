@@ -104,7 +104,8 @@ class UserServiceImplTest {
         doNothing().when(passwordHelper).validate(userRequest.getPassword());
         when(passwordHelper.enconde(userRequest.getPassword())).thenReturn(String.valueOf(String.class));
         when(userRepository.save(user)).thenReturn(user);
-        when(catchError.run(any(CatchError.FunctionWithException.class))).thenAnswer(invocation -> userRepository.save(user));
+        when(catchError.run(any(CatchError.FunctionWithException.class)))
+                .thenAnswer(invocation -> userRepository.save(user));
         when(dataMapper.map(user, UserResponse.class)).thenReturn(expectedResponse);
 
         // Act
@@ -130,7 +131,8 @@ class UserServiceImplTest {
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
         when(userRepository.save(user)).thenReturn(user);
         when(dataMapper.map(user, UserResponse.class)).thenReturn(expectedResponse);
-        when(catchError.run(any(CatchError.FunctionWithException.class))).then(invocation -> invocation
+        when(catchError.run(any(CatchError.FunctionWithException.class)))
+                .then(invocation -> invocation
                 .getArgument(0, CatchError.FunctionWithException.class).run());
 
         // Act
@@ -153,7 +155,8 @@ class UserServiceImplTest {
 
         when(dataMapper.map(user, UserResponse.class)).thenReturn(expectedResponse);
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
-        when(catchError.run(any(CatchError.FunctionWithException.class))).thenAnswer(invocation -> userRepository.findById(user.getId()));
+        when(catchError.run(any(CatchError.FunctionWithException.class)))
+                .thenAnswer(invocation -> userRepository.findById(user.getId()));
 
         // Act
         UserResponse actualResponse = userService.getUserById(user.getId());
@@ -172,7 +175,8 @@ class UserServiceImplTest {
     void shouldThrowExceptionWhenUserNotFoundById() {
         // Arrange
         when(userRepository.findById(user.getId())).thenReturn(Optional.empty());
-        when(catchError.run(any(CatchError.FunctionWithException.class))).thenAnswer(invocation -> userRepository.findById(user.getId()));
+        when(catchError.run(any(CatchError.FunctionWithException.class)))
+                .thenAnswer(invocation -> userRepository.findById(user.getId()));
 
         // Act and Assert
         assertThrows(NotFoundException.class, () -> userService.getUserById("1"),
@@ -194,7 +198,8 @@ class UserServiceImplTest {
         when(userRepository.save(user)).thenReturn(user);
         when(dataMapper.map(userRequest, user)).thenReturn(user);
         when(dataMapper.map(user, UserResponse.class)).thenReturn(expectedResponse);
-        when(catchError.run(any(CatchError.FunctionWithException.class))).then(invocation -> invocation
+        when(catchError.run(any(CatchError.FunctionWithException.class)))
+                .then(invocation -> invocation
                 .getArgument(0, CatchError.FunctionWithException.class).run());
 
         // Act
@@ -218,7 +223,8 @@ class UserServiceImplTest {
     void shouldDeleteUser() {
         // Arrange
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
-        when(catchError.run(any(CatchError.FunctionWithException.class))).then(invocation -> userRepository.findById(user.getId()));
+        when(catchError.run(any(CatchError.FunctionWithException.class)))
+                .then(invocation -> userRepository.findById(user.getId()));
         doAnswer(invocation -> {
             userRepository.delete(user);
             return null;
