@@ -79,27 +79,48 @@
     const apiBaseUrl = 'http://localhost:8080/api/v1/users';
     let userIdToDelete = null;
 
+    function getToken() {
+        return localStorage.getItem('token');
+    }
+
     function fetchUsers() {
-        fetch(apiBaseUrl)
-            .then(response => response.json())
-            .then(users => {
-                const tableBody = document.getElementById('userTableBody');
-                tableBody.innerHTML = '';
-                users.forEach(user => {
-                    const row = `<tr>
-                        <td>${user.id}</td>
-                        <td>${user.name}</td>
-                        <td>${user.email}</td>
-                        <td>${user.role}</td>
-                        <td>
-                            <button class="btn btn-warning btn-sm" onclick="editUser('${user.id}')">Editar</button>
-                            <button class="btn btn-danger btn-sm" onclick="confirmDelete('${user.id}', '${user.name}')">Excluir</button>
-                        </td>
-                    </tr>`;
-                    tableBody.innerHTML += row;
-                });
-            })
-            .catch(error => console.error('Erro ao buscar usuários:', error));
+        const token = getToken();
+        if (!token) {
+            console.error('Token JWT não encontrado. Usuário precisa fazer login.');
+            return;
+        }
+
+        fetch(apiBaseUrl, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(users => {
+            const tableBody = document.getElementById('userTableBody');
+            tableBody.innerHTML = '';
+            users.forEach(user => {
+                const row = `<tr>
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="editUser('${user.id}')">Editar</button>
+                        <button class="btn btn-danger btn-sm" onclick="confirmDelete('${user.id}', '${user.name}')">Excluir</button>
+                    </td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error('Erro ao buscar usuários:', error));
     }
 
     function abrirFormulario() {
@@ -116,14 +137,29 @@
 
     document.getElementById('userForm').addEventListener('submit', function(event) {
         event.preventDefault();
+        const token = getToken();
+        if (!token) {
+            console.error('Token JWT não encontrado. Usuário precisa fazer login.');
+            return;
+        }
+
         const name = document.getElementById('userName').value;
         const email = document.getElementById('userEmail').value;
         const role = document.getElementById('userRole').value;
 
         fetch(apiBaseUrl, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({ name, email, role })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
         })
         .then(() => {
             fetchUsers();
@@ -134,14 +170,28 @@
     });
 
     document.getElementById('confirmDeleteBtn').addEventListener('click', () => {
+        const token = getToken();
+        if (!token) {
+            console.error('Token JWT não encontrado. Usuário precisa fazer login.');
+            return;
+        }
+
         if (userIdToDelete) {
             fetch(`${apiBaseUrl}/${userIdToDelete}`, {
-                method: 'DELETE'
-            }).then(() => {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro ${response.status}: ${response.statusText}`);
+                }
                 fetchUsers();
                 const modal = bootstrap.Modal.getInstance(document.getElementById('confirmDeleteModal'));
                 modal.hide();
-            }).catch(error => console.error('Erro ao excluir usuário:', error));
+            })
+            .catch(error => console.error('Erro ao excluir usuário:', error));
         }
     });
 
