@@ -27,12 +27,12 @@
     </table>
 </div>
 
-<!-- Modal de Adição de Usuário -->
+<!-- Modal de Adição/Edição de Usuário -->
 <div class="modal fade" id="userFormModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Adicionar Usuário</h5>
+                <h5 id="formTitle" class="modal-title">Adicionar Usuário</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -49,7 +49,7 @@
                         <label for="userRole" class="form-label">Role</label>
                         <input type="text" class="form-control" id="userRole" required>
                     </div>
-                    <button type="submit" class="btn btn-success">Salvar</button>
+                    <button type="submit" id="saveUserBtn" class="btn btn-success">Adicionar</button>
                 </form>
             </div>
         </div>
@@ -78,6 +78,7 @@
 <script>
     const apiBaseUrl = 'http://localhost:8080/api/v1/users';
     let userIdToDelete = null;
+    let userIdToEdit = null;
 
     function getToken() {
         return localStorage.getItem('token');
@@ -113,7 +114,7 @@
                     <td>${user.email}</td>
                     <td>${user.role}</td>
                     <td>
-                        <button class="btn btn-warning btn-sm" onclick="editUser('${user.id}')">Editar</button>
+                        <button class="btn btn-warning btn-sm" onclick="editUser('${user.id}', '${user.name}', '${user.email}', '${user.role}')">Editar</button>
                         <button class="btn btn-danger btn-sm" onclick="confirmDelete('${user.id}', '${user.name}')">Excluir</button>
                     </td>
                 </tr>`;
@@ -124,14 +125,28 @@
     }
 
     function abrirFormulario() {
+        userIdToEdit = null;
+        document.getElementById('userName').value = '';
+        document.getElementById('userEmail').value = '';
+        document.getElementById('userRole').value = '';
+
+        document.getElementById('formTitle').innerText = 'Adicionar Usuário';
+        document.getElementById('saveUserBtn').innerText = 'Adicionar';
+
         const modal = new bootstrap.Modal(document.getElementById('userFormModal'));
         modal.show();
     }
 
-    function confirmDelete(userId, userName) {
-        userIdToDelete = userId;
-        document.getElementById('deleteUserName').textContent = userName;
-        const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+    function editUser(id, name, email, role) {
+        userIdToEdit = id;
+        document.getElementById('userName').value = name;
+        document.getElementById('userEmail').value = email;
+        document.getElementById('userRole').value = role;
+
+        document.getElementById('formTitle').innerText = 'Editar Usuário';
+        document.getElementById('saveUserBtn').innerText = 'Salvar Alterações';
+
+        const modal = new bootstrap.Modal(document.getElementById('userFormModal'));
         modal.show();
     }
 
@@ -146,9 +161,11 @@
         const name = document.getElementById('userName').value;
         const email = document.getElementById('userEmail').value;
         const role = document.getElementById('userRole').value;
+        const method = userIdToEdit ? 'PUT' : 'POST';
+        const url = userIdToEdit ? `${apiBaseUrl}/${userIdToEdit}` : apiBaseUrl;
 
-        fetch(apiBaseUrl, {
-            method: 'POST',
+        fetch(url, {
+            method: method,
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
@@ -166,8 +183,15 @@
             const modal = bootstrap.Modal.getInstance(document.getElementById('userFormModal'));
             modal.hide();
         })
-        .catch(error => console.error('Erro ao adicionar usuário:', error));
+        .catch(error => console.error('Erro ao salvar usuário:', error));
     });
+
+    function confirmDelete(userId, userName) {
+        userIdToDelete = userId;
+        document.getElementById('deleteUserName').textContent = userName;
+        const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+        modal.show();
+    }
 
     document.getElementById('confirmDeleteBtn').addEventListener('click', () => {
         const token = getToken();
@@ -183,10 +207,7 @@
                     'Authorization': `Bearer ${token}`
                 }
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Erro ${response.status}: ${response.statusText}`);
-                }
+            .then(() => {
                 fetchUsers();
                 const modal = bootstrap.Modal.getInstance(document.getElementById('confirmDeleteModal'));
                 modal.hide();
