@@ -46,6 +46,10 @@
                         <input type="email" class="form-control" id="userEmail" required>
                     </div>
                     <div class="mb-3">
+                        <label for="userPassword" class="form-label">Senha</label>
+                        <input type="password" class="form-control" id="userPassword" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="userRole" class="form-label">Role</label>
                         <input type="text" class="form-control" id="userRole" required>
                     </div>
@@ -128,6 +132,7 @@
         userIdToEdit = null;
         document.getElementById('userName').value = '';
         document.getElementById('userEmail').value = '';
+        document.getElementById('userPassword').value = '';
         document.getElementById('userRole').value = '';
 
         document.getElementById('formTitle').innerText = 'Adicionar Usuário';
@@ -160,7 +165,9 @@
 
         const name = document.getElementById('userName').value;
         const email = document.getElementById('userEmail').value;
+        const password = document.getElementById('userPassword').value;
         const role = document.getElementById('userRole').value;
+
         const method = userIdToEdit ? 'PUT' : 'POST';
         const url = userIdToEdit ? `${apiBaseUrl}/${userIdToEdit}` : apiBaseUrl;
 
@@ -170,7 +177,7 @@
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name, email, role })
+            body: JSON.stringify({ name, email, password, role })
         })
         .then(response => {
             if (!response.ok) {
