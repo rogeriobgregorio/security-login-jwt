@@ -11,6 +11,8 @@
 <div class="container">
     <h2 class="mb-4">Gerenciamento de Usuários</h2>
     <button class="btn btn-primary mb-3" onclick="abrirFormulario()">Adicionar Usuário</button>
+    <button class="btn btn-secondary mb-3" onclick="navigateTo('http://127.0.0.1:5500/index.html')">Home</button>
+    <button class="btn btn-danger mb-3" onclick="logout()">Logout</button>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -222,6 +224,17 @@
             .catch(error => console.error('Erro ao excluir usuário:', error));
         }
     });
+
+    function navigateTo(url) {
+    window.location.href = url;
+    }
+
+    function logout() {
+    localStorage.removeItem('token'); // Remove o token JWT do localStorage
+    alert('Você saiu com sucesso!');
+    navigateTo('http://127.0.0.1:5500/index.html'); // Redireciona para a página inicial
+    }
+
 
     window.onload = fetchUsers;
 </script>
