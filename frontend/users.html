@@ -5,14 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciamento de Usuários</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin-top: 50px;
+        }
+        h2 {
+            color: #333;
+        }
+        .btn {
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        .modal-content {
+            border-radius: 12px;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+        .table-bordered {
+            border: 1px solid #ddd;
+        }
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body class="bg-light p-4">
 
 <div class="container">
     <h2 class="mb-4">Gerenciamento de Usuários</h2>
-    <button class="btn btn-primary mb-3" onclick="abrirFormulario()">Adicionar Usuário</button>
-    <button class="btn btn-secondary mb-3" onclick="navigateTo('http://127.0.0.1:5500/index.html')">Home</button>
-    <button class="btn btn-danger mb-3" onclick="logout()">Logout</button>
+    <div class="d-flex justify-content-start mb-3">
+        <button class="btn btn-primary me-2" onclick="abrirFormulario()">Adicionar Usuário</button>
+        <button class="btn btn-secondary me-2" onclick="navigateTo('http://127.0.0.1:5500/index.html')">Home</button>
+        <button class="btn btn-danger" onclick="logout()">Logout</button>
+    </div>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -226,15 +279,14 @@
     });
 
     function navigateTo(url) {
-    window.location.href = url;
+        window.location.href = url;
     }
 
     function logout() {
-    localStorage.removeItem('token'); // Remove o token JWT do localStorage
-    alert('Você saiu com sucesso!');
-    navigateTo('http://127.0.0.1:5500/index.html'); // Redireciona para a página inicial
+        localStorage.removeItem('token'); // Remove o token JWT do localStorage
+        alert('Você saiu com sucesso!');
+        navigateTo('http://127.0.0.1:5500/index.html'); // Redireciona para a página inicial
     }
-
 
     window.onload = fetchUsers;
 </script>
